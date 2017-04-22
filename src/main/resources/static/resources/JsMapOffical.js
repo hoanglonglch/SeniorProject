@@ -11,32 +11,6 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-function getBack(url) {
-    $.ajax({
-        type: "GET"
-        , url: url
-        , success: function (data) {
-            let html = jQuery('<body>').html(data);
-            let content = html.find("#content").html();
-            $("#content").html(content);
-        }
-    });
-}
-
-/* redirect to direction page */
-function getDirectionContent(url) {
-    let routeUrl = url + "/direction";
-    $.ajax({
-        type: "GET"
-        , url: routeUrl
-        , success: function (data) {
-            let html = jQuery('<body>').html(data);
-            let content = html.find("#content").html();
-            $("#content").html(content);
-        }
-    });
-}
-
 function initMap() {
     let directionsService = new google.maps.DirectionsService;
     var directionsDisplay=new google.maps.DirectionsRenderer;
@@ -77,21 +51,17 @@ function initMap() {
         clearMarkers();
         $("#routes-tab").html(routesTab);
     });
-    $("#dispatchRoutes").click(function(){
-// $("#content").html(routesTab);
-    });
-    $("#dispatchDirection").click(function(){
-// $("#content").html(directionTab);
-    });
+    
     $("body").on("click", ".rowClear", function (event) {
         clearMarkers();
         markers = [];
-        let routeId = $(this).find(".routeId").text();
-        trend = "true";
+        let spotId = $(this).find(".spotId").text();
+        sideBarSpotGetContent(url, spotId);
+       /* trend = "true";
         currentTrend = "true"
         ajaxGetContent(url, routeId, trend);
         currentRoute = routeId;
-        callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow);
+        callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow);*/
     });
     $("body").on("click", "#btnBack", function (event) {
         currentTrend = "false";
@@ -124,19 +94,16 @@ function checkTrend(currentTrend, currentRoute, url, directionsService, directio
     }
 }
 
-function ajaxGetContent(url, routeId, trend) {
-    var getUrl = url + "/route/" + routeId;
+function sideBarSpotGetContent(url, spotId) {
+    var getUrl = url + "/spot/" + spotId;
     $.ajax({
         type: "GET"
         , url: getUrl
-        , data: {
-            trend: trend
-        }
         , success: function (data) {
             var html = jQuery('<body>').html(data);
-            var content = html.find("#content").html();
+            var content = html.find("#station-detail").html();
             $("#routes-tab").html(content);
-             showMarkerDetail(markers);
+             /*showMarkerDetail(markers);*/
         }
     });
 }

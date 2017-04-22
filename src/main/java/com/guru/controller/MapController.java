@@ -8,50 +8,43 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guru.service.IMapService;;
 
-
 @Controller
-@RequestMapping(value="/map")
+@RequestMapping(value = "/map")
 public class MapController {
 	@Autowired
 	public IMapService serviceMap;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String home(Model model){
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String home(Model model) {
 		return "map_offical";
 	}
-	
-	@RequestMapping(value=MapURL.BUS_ROUTE,method=RequestMethod.GET)
-	public String busRouteInDetail(@PathVariable("id")String id,
-									@RequestParam(value="trend")String trend){
+
+	@RequestMapping(value = MapURL.SPOT, method = RequestMethod.GET)
+	public String spotDetailSideBar(@PathVariable("id") int id, Model model) {
+		switch (id) {
+		case 1:
+			model.addAttribute("station","Đồn Công An");
+			model.addAttribute("stations", serviceMap.getPoliceStations());
+			break;
+		case 2:
+			model.addAttribute("station","Bệnh Viện");
+			model.addAttribute("stations", serviceMap.getHospitalStations());
+			break;
+		case 3:
+			model.addAttribute("station","WC");
+			model.addAttribute("stations", serviceMap.getWcStations());
+			break;
+		case 4:
+			model.addAttribute("station","Trạm Xe Buýt");
+			model.addAttribute("stations",serviceMap.getBusStations());
+			break;
+		}
 		return "stations_map";
 	}
-	
-	@RequestMapping(value=MapURL.BUS_STATIONS,method=RequestMethod.GET)
-	public @ResponseBody String drawBusRoute(@RequestParam(value="busRoute")String route,
-												@RequestParam(value="trend") String trend){
-		String reponseJson="";
-		return reponseJson;
-	}
-	
-	@RequestMapping(value=MapURL.BUS_ROUTE_DIRECTION,method=RequestMethod.GET)
-	public String direction(){
-		return "direction_map";
-	}
-	@RequestMapping(value=MapURL.BUS_ROUTE_DIRECTION_DETAIL,method=RequestMethod.GET)
-	public @ResponseBody String directionInDetail(@RequestParam(value="startPoint")String startPoint,
-													@RequestParam(value="endPoint")String endPoint){
-		logger.info(startPoint+" "+endPoint);
-		String reponseJson="";
-		return reponseJson;
-	}
-	
-	
-	
+
 }
