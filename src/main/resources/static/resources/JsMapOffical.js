@@ -23,7 +23,7 @@ function getBack(url) {
     });
 }
 
-/*redirect to direction page*/
+/* redirect to direction page */
 function getDirectionContent(url) {
     let routeUrl = url + "/direction";
     $.ajax({
@@ -39,13 +39,17 @@ function getDirectionContent(url) {
 
 function initMap() {
     let directionsService = new google.maps.DirectionsService;
-    let directionsDisplay = new google.maps.DirectionsRenderer;
+    var directionsDisplay=new google.maps.DirectionsRenderer;
     let geocoder = new google.maps.Geocoder;
     let infowindow = new google.maps.InfoWindow;
-    let btnDispatchRoutes = $("#dispatchRoutes");
-    let btnDispatchDirection = $("#dispatchDirection");
     let currentRoute;
     var styledMapType = customizeMap();
+    
+    let directionTab=$("#directions-tab").html();
+    let routesTab=$("#routes-tab").html();
+// console.log(directionTab.html());
+    
+    
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12
         , center: {
@@ -59,55 +63,54 @@ function initMap() {
     });
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-    directionsDisplay.setMap(map);
-    directionsDisplay.setOptions({
-        suppressMarkers: true
-    });
+   /*
+	 * directionsDisplay.setMap(map); directionsDisplay.setOptions({
+	 * suppressMarkers: true });
+	 */
     /* init event for app */
     
     
-    btnDispatchDirection.click(function () {
-        btnDispatchRoutes.removeClass("active");
-        btnDispatchDirection.addClass("active");
-        //call ajax to change content
-        getDirectionContent(url);
-    });
-    btnDispatchRoutes.click(function () {
-        btnDispatchDirection.removeClass("active");
-        btnDispatchRoutes.addClass("active");
-        //call ajax
-        getBack(url);
-    });
     $("body").on("click", ".btn-back", function (event) {
-        getBack(url);
+        if(directionsDisplay){
+            directionsDisplay.setMap(null);
+        }
+        clearMarkers();
+        $("#routes-tab").html(routesTab);
+    });
+    $("#dispatchRoutes").click(function(){
+// $("#content").html(routesTab);
+    });
+    $("#dispatchDirection").click(function(){
+// $("#content").html(directionTab);
     });
     $("body").on("click", ".rowClear", function (event) {
         clearMarkers();
         markers = [];
         let routeId = $(this).find(".routeId").text();
-        trend = "go";
-        currentTrend = "go"
+        trend = "true";
+        currentTrend = "true"
         ajaxGetContent(url, routeId, trend);
         currentRoute = routeId;
         callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow);
     });
     $("body").on("click", "#btnBack", function (event) {
-        currentTrend = "back";
+        currentTrend = "false";
         checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow);
     });
     $("body").on("click", "#btnGo", function (event) {
-        currentTrend = "go";
+        currentTrend = "true";
         checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow);
     });
     $("body").on("click","#btnSearch",function(event){
-        sendAddress(url,startPoint,endPoint);
+        sendAddress();
     });
 }
 
 function sendAddress(){
     let startPoint=$("#startPoint").val();
     let endPoint=$("#endPoint").val();
-    ajaxDirection(url,startPoint,endPoint) 
+    ajaxDirection(url,startPoint,endPoint);
+    sideBarDirection(url,startPoint,endPoint);
 }
 
 function checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow) {
@@ -132,7 +135,7 @@ function ajaxGetContent(url, routeId, trend) {
         , success: function (data) {
             var html = jQuery('<body>').html(data);
             var content = html.find("#content").html();
-            $("#content").html(content);
+            $("#routes-tab").html(content);
              showMarkerDetail(markers);
         }
     });
@@ -148,9 +151,26 @@ function ajaxDirection(url,startPoint,endPoint) {
             endPoint:endPoint
         }
         , success: function (data) {
-            console.log("datat ne "+data);
+            console.log("datat ne "+data[0].name);
         }
     });
+}
+function sideBarDirection(url,startPoint,endPoint) {
+	var getUrl = url + "/direction" ;
+	$.ajax({
+		type: "GET"
+			, url: getUrl
+			, data: {
+				startPoint:startPoint,
+				endPoint:endPoint
+			}
+	, success: function (data) {
+		let html = jQuery('<body>').html(data);
+        let content = html.find("#contentDirection").html();
+        $("#direction-content").html(content);
+         showMarkerDetail(markers);
+	}
+	});
 }
 
 function getBack(url) {
@@ -190,13 +210,13 @@ function parseLng(str) {
 }
 
 function callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow) {
-    let busRoute = "route" + routeId;
+// let busRoute = "route" + routeId;
     $.ajax({
         type: "GET"
         , contentType: "application/json"
         , url: url + "/ajax"
         , data: {
-            busRoute: busRoute
+            busRoute: routeId
             , trend: trend
         }
         , dataType: 'json'
@@ -218,10 +238,11 @@ function calculateAndDisplayRoute1(directionsService, directionsDisplay, jsonRes
     let lat;
     let lng;
     for (let i = 0; i < jsonResponse.length; i++) {
-        lat = parseLat(jsonResponse[i].latLng);
-        lng = parseLng(jsonResponse[i].latLng);
+        lat =jsonResponse[i].lat;
+        lng = jsonResponse[i].lng;
         wayPointsIcon = "https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=" + (i + 1) + "|FF0000|000000";
         if (i == 0) {
+        	
             marker = createMarker(lat, lng, startIcon, map);
             markers.push(marker);
         }
@@ -238,24 +259,12 @@ function calculateAndDisplayRoute1(directionsService, directionsDisplay, jsonRes
             markers.push(marker);
         }
         markers[i].addListener('click', function () {
-            geocodeLatLng(geocoder, map, infowindow, jsonResponse[i].latLng, jsonResponse[i].name);
+        	map.setCenter(markers[i].getPosition());
+           geocodeLatLng(geocoder, map, infowindow,	 lat,lng, jsonResponse[i].name);
             infowindow.open(map, markers[i]);
         });
     }
-    directionsService.route({
-        origin: new google.maps.LatLng(parseLat(jsonResponse[0].latLng), parseLng(jsonResponse[0].latLng))
-        , destination: new google.maps.LatLng(parseLat(jsonResponse[totalDataLength - 1].latLng), parseLng(jsonResponse[totalDataLength - 1].latLng))
-        , waypoints: waypts
-        , optimizeWaypoints: true
-        , travelMode: 'DRIVING'
-    }, function (response, status) {
-        if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-        }
-        else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
+    drawDirection(jsonResponse,map,directionsService,directionsDisplay);
 }
 
 function createMarker(lat, lng, icon, map) {
@@ -263,19 +272,19 @@ function createMarker(lat, lng, icon, map) {
         position: new google.maps.LatLng(lat, lng)
         , icon: icon
         , map: map
-    });
+    });	
     return marker;
 }
 function showMarkerDetail(markers){
-    let stationsName=$(".stationsName");
-    for(let j=0;j<stationsName.length;j++){
-        google.maps.event.addDomListener(stationsName[j], "click", function () {
-                google.maps.event.trigger(markers[j], "click");
-        });
-    }
+	let stationsName = $(".stationsName");
+	for(let j=0;j<stationsName.length;j++){
+		google.maps.event.addDomListener(stationsName[j],"click",function(){
+			google.maps.event.trigger(markers[j],"click");
+		});
+	}
 }
 
-/*backup if markers = 0*/
+/* backup if markers = 0 */
 function showMarkerDetail1(markers){
     let markersLength=markers.length;
     let stationsName=$(".stationsName");
@@ -291,13 +300,10 @@ function showMarkerDetail1(markers){
         alert("ahhihi");
     }
 }
-
-
-function geocodeLatLng(geocoder, map, infowindow, latLngObj, nameStation) {
-    let latlngStr = latLngObj.split(',', 2);
+function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {
     let latlng = {
-        lat: parseFloat(latlngStr[0])
-        , lng: parseFloat(latlngStr[1])
+        lat: lat1
+        , lng:lng1
     };
     geocoder.geocode({
         'location': latlng
@@ -316,7 +322,59 @@ function geocodeLatLng(geocoder, map, infowindow, latLngObj, nameStation) {
         }
     });
 }
+function drawDirection(stations,map,service,directionsDisplay){
 
+    var lngs = stations.map(function (station) {
+        return station.lng;
+    });
+    var lats = stations.map(function (station) {
+        return station.lat;
+    });
+    map.fitBounds({
+        west: Math.min.apply(null, lngs)
+        , east: Math.max.apply(null, lngs)
+        , north: Math.min.apply(null, lats)
+        , south: Math.max.apply(null, lats)
+    , });
+    // Divide route to several parts because max stations limit is 25 (23
+	// waypoints + 1 origin + 1 destination)
+    for (var i = 0, parts = [], max = 25-1; i < stations.length; i = i + max) parts.push(stations.slice(i, i + max + 1));
+    // Callback function to process service results
+    var service_callback = function (response, status) {
+        if (status != 'OK') {
+            console.log('Directions request failed due to ' + status);
+            return;
+        }
+        
+// directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay.setMap(map);
+        directionsDisplay.setOptions({
+            suppressMarkers: true
+            , preserveViewport: true
+        });
+        directionsDisplay.setDirections(response);
+    };
+    // Send requests to service to get route (for stations count <= 25 only one
+	// request will be sent)
+    for (var i = 0; i < parts.length; i++) {
+        // Waypoints does not include first station (origin) and last station
+		// (destination)
+        var waypoints = [];
+        for (var j = 1; j < parts[i].length - 1; j++) waypoints.push({
+            location: parts[i][j]
+            , stopover: false
+        });
+        // Service options
+        var service_options = {
+            origin: parts[i][0]
+            , destination: parts[i][parts[i].length - 1]
+            , waypoints: waypoints
+            , travelMode: 'DRIVING'
+        };
+        // Send request
+        service.route(service_options, service_callback);
+    }
+}
 function customizeMap() {
     let styledMapType = new google.maps.StyledMapType(
 			    [

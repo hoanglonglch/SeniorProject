@@ -1,7 +1,5 @@
 package com.guru.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.guru.model.BusStop;
 import com.guru.service.IMapService;;
 
 
@@ -32,24 +29,14 @@ public class MapController {
 	
 	@RequestMapping(value=MapURL.BUS_ROUTE,method=RequestMethod.GET)
 	public String busRouteInDetail(@PathVariable("id")String id,
-									@RequestParam(value="trend")String trend,
-									Model model){
-		// get list bus station
-		// send it into content_map.html
-		String busRoute= serviceMap.getRouteName(id);
-		id="route"+id;
-		List<BusStop> busStops= serviceMap.getBusStops(id, trend);
-		model.addAttribute("busRoute",busRoute);
-		model.addAttribute("busStops",busStops);
+									@RequestParam(value="trend")String trend){
 		return "stations_map";
 	}
 	
 	@RequestMapping(value=MapURL.BUS_STATIONS,method=RequestMethod.GET)
 	public @ResponseBody String drawBusRoute(@RequestParam(value="busRoute")String route,
 												@RequestParam(value="trend") String trend){
-		logger.info(route);
 		String reponseJson="";
-		reponseJson=serviceMap.findBusRoute(route,trend);
 		return reponseJson;
 	}
 	

@@ -1,0 +1,541 @@
+[  
+   {  
+      "id":1,
+      "name":"Cty TNHH Lưu niệm Đà Nẵng",
+      "address":"34 Bạch Đằng, Hải Châu",
+      "lat":16.077919,
+      "lng":108.223767
+   },
+   {  
+      "id":2,
+      "name":"Di lusso Hotel",
+      "address":"14 Bạch Đằng, Hải Châu",
+      "lat":16.079293,
+      "lng":108.223571
+   },
+   {  
+      "id":3,
+      "name":"Cty TNHH Sa La Thái",
+      "address":"111 Lê Lợi, Hải Châu",
+      "lat":16.075595,
+      "lng":108.219858
+   },
+   {  
+      "id":4,
+      "name":"Nhà Hàng & Cà phê Trúc Lâm Viên",
+      "address":"8-10 Trần Quý Cáp, Hải Châu",
+      "lat":16.081532,
+      "lng":108.221941
+   },
+   {  
+      "id":5,
+      "name":"Moonlight Hotel",
+      "address":"136 - 140 Phan Châu Trinh, Hải Châu",
+      "lat":16.063896,
+      "lng":108.219856
+   },
+   {  
+      "id":6,
+      "name":"Cty cổ phần Thạch bàn Miền Trung",
+      "address":"149 Phan Châu Trinh, Hải Châu",
+      "lat":16.064544,
+      "lng":108.220033
+   },
+   {  
+      "id":7,
+      "name":"Cty CP tin học và công nghệ",
+      "address":"53 Hoàng Diệu, Hải châu",
+      "lat":16.064567,
+      "lng":108.219000
+   },
+   {  
+      "id":8,
+      "name":"Tiên Sa Hotel",
+      "address":"21 Lý Thường Kiệt, Hải Châu",
+      "lat":16.080075,
+      "lng":108.219614
+   },
+   {  
+      "id":9,
+      "name":"Coffee FC Hotel",
+      "address":"83 Trần Phú, Hải Châu",
+      "lat":16.069960,
+      "lng":108.224076
+   },
+   {  
+      "id":10,
+      "name":"Cty TNHH TM-DL Hoàng Trà",
+      "address":"6 Lê Lợi, Hải Châu",
+      "lat":16.080136,
+      "lng":108.219034
+   },
+   {  
+      "id":11,
+      "name":"Cty CP Đầu tư Sao Minh",
+      "address":"137 Nguyễn Du, Hải Châu",
+      "lat":16.078312,
+      "lng":108.217814
+   },
+   {  
+      "id":12,
+      "name":"Trung tâm Y khoa kĩ thuật cao",
+      "address":"276-278 Đống Đa, Hải Châu",
+      "lat":16.076319,
+      "lng":108.215561
+   },
+   {  
+      "id":13,
+      "name":"FulMar Hotel",
+      "address":"11 Yên Bái, Hải Châu",
+      "lat":16.069868,
+      "lng":108.222846
+   },
+   {  
+      "id":14,
+      "name":"UBND Phường Thuận Phước",
+      "address":"88 Đống Đa, Hải Châu",
+      "lat":16.079364,
+      "lng":108.217877
+   },
+   {  
+      "id":15,
+      "name":"Nhà nghĩ Viễn Đông",
+      "address":"21 Yên Bái, Hải Châu",
+      "lat":16.069800,
+      "lng":108.222893
+   },
+   {  
+      "id":16,
+      "name":"Nhà hàng cơm niêu Trúc Lâm",
+      "address":"25 Yên Bái, Hải Châu",
+      "lat":16.069067,
+      "lng":108.222941
+   },
+   {  
+      "id":17,
+      "name":"Che'rie Hotel",
+      "address":"155 Trần Phú, Hải Châu",
+      "lat":16.066957,
+      "lng":108.224020
+   },
+   {  
+      "id":18,
+      "name":"Cửa hàng BQ",
+      "address":"57 Lê Duẩn, Hải Châu",
+      "lat":16.071171,
+      "lng":108.219051
+   },
+   {  
+      "id":19,
+      "name":"UBND Phường Thạch Thang",
+      "address":"136 Quang Trung, Hải Châu",
+      "lat":16.073811,
+      "lng":108.215052
+   },
+   {  
+      "id":20,
+      "name":"Nhật Hạ II Hotel",
+      "address":"196 Nguyễn Chí Thanh, Hải CHâu",
+      "lat":16.069556,
+      "lng":108.221211
+   },
+   {  
+      "id":21,
+      "name":"New moon Hotel",
+      "address":"126 Bạch Đằng, Hải Châu",
+      "lat":16.067592,
+      "lng":108.224731
+   },
+   {  
+      "id":22,
+      "name":"Nhà nghỉ Gia Khang",
+      "address":"112 Hải Hồ, Hải Châu",
+      "lat":16.078529,
+      "lng":108.214901
+   },
+   {  
+      "id":23,
+      "name":"Khách sạn Brilliant",
+      "address":"161 Trần Phú, Hải Châu",
+      "lat":16.066563,
+      "lng":108.223650
+   },
+   {  
+      "id":24,
+      "name":"BamBoo Green Hotel",
+      "address":"177 Trần Phú, Hải Châu",
+      "lat":16.066501,
+      "lng":108.223752
+   },
+   {  
+      "id":25,
+      "name":"Mỳ quảng Ếch",
+      "address":"24 Pasteur, Hải Châu",
+      "lat":16.070210,
+      "lng":108.219393
+   },
+   {  
+      "id":26,
+      "name":"Caraven Hotel",
+      "address":"206-210 Lý Tự Trọng, Hải Châu",
+      "lat":16.078807,
+      "lng":108.213587
+   },
+   {  
+      "id":27,
+      "name":"Bookaholic hostel",
+      "address":"132 đường 3/2, Hải Châu",
+      "lat":16.086154,
+      "lng":108.218108
+   },
+   {  
+      "id":28,
+      "name":"Luxury Hotel",
+      "address":"205 Trần Phú, Hải Châu",
+      "lat":16.071346,
+      "lng":108.218436
+   },
+   {  
+      "id":29,
+      "name":"UBND Phường Hải Châu 1",
+      "address":"K48/46 Trần Phú, Hải Châu",
+      "lat":16.065045,
+      "lng":108.223632
+   },
+   {  
+      "id":30,
+      "name":"UBND Phường Thanh Bình",
+      "address":"76 Ông Ích Khiêm, Hải Châu",
+      "lat":16.076757,
+      "lng":108.211876
+   },
+   {  
+      "id":31,
+      "name":"Đại Á Hotel",
+      "address":"51 Yên Bái, Hải Châu",
+      "lat":16.065946,
+      "lng":108.222452
+   },
+   {  
+      "id":32,
+      "name":"Cty TNHH Boulevard Gelato",
+      "address":"77 Trần Quốc Toản, Hải Châu",
+      "lat":16.066236,
+      "lng":108.221001
+   },
+   {  
+      "id":33,
+      "name":"Nhà hàng Apsara",
+      "address":"222 Trần Phú, Hải Châu",
+      "lat":16.063596,
+      "lng":108.223461
+   },
+   {  
+      "id":34,
+      "name":"Night Sky Hotel",
+      "address":"65 Xuân Diệu, Hải Châu",
+      "lat":16.088775,
+      "lng":108.219600
+   },
+   {  
+      "id":35,
+      "name":"Khách sạn Green Plaza",
+      "address":"233 Trần Phú, Hải Châu",
+      "lat":16.063281,
+      "lng":108.223436
+   },
+   {  
+      "id":36,
+      "name":"Nhà nghỉ Tomodachi house",
+      "address":"17 Trần Bình Trọng, Hải Châu",
+      "lat":16.065977,
+      "lng":108.219258
+   },
+   {  
+      "id":37,
+      "name":"Ngân Hàng TMCP Sài Gòn",
+      "address":"256 Trần Phú, Hải Châu",
+      "lat":16.062430,
+      "lng":108.223142
+   },
+   {  
+      "id":38,
+      "name":"UBND Quận Hải Châu",
+      "address":"270 Trần Phú, Hải Châu",
+      "lat":16.061783,
+      "lng":108.223088
+   },
+   {  
+      "id":39,
+      "name":"Gopatel Hotel",
+      "address":"202 Nguyễn Chí Thanh, Hải Châu",
+      "lat":16.064219,
+      "lng":108.220486
+   },
+   {  
+      "id":40,
+      "name":"Cty TNHH ESCTASY",
+      "address":"168 Phan Châu Trinh, Hải Châu",
+      "lat":16.063549,
+      "lng":108.219860
+   },
+   {  
+      "id":41,
+      "name":"UBND Phường Hải Châu 2",
+      "address":"38 Triệu Nữ Vương, Hải Châu",
+      "lat":16.065929,
+      "lng":108.216312
+   },
+   {  
+      "id":42,
+      "name":"Draft Beer",
+      "address":"Lô 6 đường 2/9, Hải Châu",
+      "lat":16.060372,
+      "lng":108.223638
+   },
+   {  
+      "id":43,
+      "name":"Quán Bà Thôi",
+      "address":"96-98 Lê Đình Dương, Hải Châu",
+      "lat":16.061967,
+      "lng":108.218759
+   },
+   {  
+      "id":44,
+      "name":"Nhà Hàng Sao Việt",
+      "address":"112 đường 2/9, Hải Châu",
+      "lat":16.057248,
+      "lng":108.222281
+   },
+   {  
+      "id":45,
+      "name":"Nhà Hàng Phú Mỹ Hưng",
+      "address":"44 đường 2/9",
+      "lat":16.057247,
+      "lng":108.222370
+   },
+   {  
+      "id":46,
+      "name":"UBND Phường Bình Thuận",
+      "address":"165 Trưng Nữ Vương, Hải Châu",
+      "lat":16.055729,
+      "lng":108.220205
+   },
+   {  
+      "id":47,
+      "name":"UBND Phường Nam Dương",
+      "address":"199 Hoàng Diệu, Hải Châu",
+      "lat":16.058756,
+      "lng":108.216974
+   },
+   {  
+      "id":48,
+      "name":"Bánh bèo Bà Thọ",
+      "address":"71 Nguyễn Văn Linh, Hải Châu",
+      "lat":16.060566,
+      "lng":108.214747
+   },
+   {  
+      "id":49,
+      "name":"Red Diamond Hotel",
+      "address":"21 Lê Quý Đôn, Hải Châu",
+      "lat":16.055578,
+      "lng":108.221351
+   },
+   {  
+      "id":50,
+      "name":"Phòng tập thể thao và cà phê",
+      "address":"02 Tuệ Tĩnh, Hải Châu",
+      "lat":16.055093,
+      "lng":108.219619
+   },
+   {  
+      "id":51,
+      "name":"UBND Phường Bình Hiên",
+      "address":"279 Hoàng Diệu, Hải Châu",
+      "lat":16.057644,
+      "lng":108.217259
+   },
+   {  
+      "id":52,
+      "name":"Cty TNHH An Thủ",
+      "address":"324-326 Hoàng Diệu, Hải Châu",
+      "lat":16.057493,
+      "lng":108.217167
+   },
+   {  
+      "id":53,
+      "name":"Khách sạn One Opera",
+      "address":"115 Nguyễn Văn Linh, Hải Châu",
+      "lat":16.060597,
+      "lng":108.216785
+   },
+   {  
+      "id":54,
+      "name":"Draft Beer",
+      "address":"Lô 5 Phạm Văn Đồng, Sơn Trà",
+      "lat":16.070078,
+      "lng":108.242490
+   },
+   {  
+      "id":55,
+      "name":"Cty CP DL Phương Đông",
+      "address":"97 Phan Châu Trinh, Hải Châu",
+      "lat":16.072071,
+      "lng":108.218336
+   },
+   {  
+      "id":56,
+      "name":"UBND Phường Hòa Thuận Đông",
+      "address":"377 Trưng Nữ Vương, Hải Châu",
+      "lat":16.066324,
+      "lng":108.220148
+   },
+   {  
+      "id":57,
+      "name":"Nhà Hàng Thiên Quế",
+      "address":"Lô 3-A5.6 Kvc Bắc Tượng Đài, Hải Châu",
+      "lat":16.048185,
+      "lng":108.223297
+   },
+   {  
+      "id":58,
+      "name":"Cty CPDL Phương Đông Việt",
+      "address":"Lô 02-A4.3 Trần Thị Lý, Hải Châu",
+      "lat":16.048800,
+      "lng":108.225592
+   },
+   {  
+      "id":59,
+      "name":"Áo Cưới KIM ƠI",
+      "address":"331 Nguyễn Tri Phương, Hải Châu",
+      "lat":16.051359,
+      "lng":108.212213
+   },
+   {  
+      "id":60,
+      "name":"Mỳ quảng Quỳnh",
+      "address":"486 Nguyễn Tri Phương",
+      "lat":16.052084,
+      "lng":108.211094
+   },
+   {  
+      "id":61,
+      "name":"Cty TNHH MTV Quang Army",
+      "address":"43 Duy Tân, Hải Châu",
+      "lat":16.048668,
+      "lng":108.212026
+   },
+   {  
+      "id":62,
+      "name":"Brown Bean Hotel",
+      "address":"380 đường 2/9, Hải Châu",
+      "lat":16.042066,
+      "lng":108.223206
+   },
+   {  
+      "id":63,
+      "name":"Shop hoa Uyên Trang",
+      "address":"444 Trưng Nữ Vương, Hải Châu",
+      "lat":16.046463,
+      "lng":108.210931
+   },
+   {  
+      "id":64,
+      "name":"Minh Toàn Galaxy Hotel",
+      "address":"306 Đường 2/9, Hải Châu",
+      "lat":16.042057,
+      "lng":108.223205
+   },
+   {  
+      "id":65,
+      "name":"Khách sạn căn hộ Homelike",
+      "address":"490 đường 2/9, Hải Châu",
+      "lat":16.042062,
+      "lng":108.223202
+   },
+   {  
+      "id":66,
+      "name":"Cty TNHH MTV Thiên Phú",
+      "address":"561 đường 2/9, Hải Châu",
+      "lat":16.042054,
+      "lng":108.223136
+   },
+   {  
+      "id":67,
+      "name":"Cty TNHH Đắc Vinh",
+      "address":"407 Trưng Nữ Vương",
+      "lat":16.045204,
+      "lng":108.209654
+   },
+   {  
+      "id":68,
+      "name":"Nhà nghỉ Thy Thy",
+      "address":"106 Nguyễn Hữu Thọ, Hải Châu",
+      "lat":16.046055,
+      "lng":108.209785
+   },
+   {  
+      "id":69,
+      "name":"UBND Phường Hòa Cường Bắc",
+      "address":"388 Núi Thành, Hải Châu",
+      "lat":16.039441,
+      "lng":108.221968
+   },
+   {  
+      "id":70,
+      "name":"Cali Beer",
+      "address":"Lô 01-02 Khu B2.3 Đường 30/4, Hải Châu",
+      "lat":16.040128,
+      "lng":108.217705
+   },
+   {  
+      "id":71,
+      "name":"UBND Phường Hòa Thuận Tây",
+      "address":"28 Nguyễn Khoái, Hải Châu",
+      "lat":16.042158,
+      "lng":108.210907
+   },
+   {  
+      "id":72,
+      "name":"Gia Nguyên Hotel",
+      "address":"95 Phan Đăng Lưu, Hải Châu",
+      "lat":16.036831,
+      "lng":108.218915
+   },
+   {  
+      "id":73,
+      "name":"Nhà nghỉ Việt Mỹ",
+      "address":"478 Núi Thành, Hải Châu",
+      "lat":16.034221,
+      "lng":108.222519
+   },
+   {  
+      "id":74,
+      "name":"Camry Hotel",
+      "address":"11 Tố Hữu, Hải Châu",
+      "lat":16.034485,
+      "lng":108.219668
+   },
+   {  
+      "id":75,
+      "name":"Mỹ Hoa Hotel",
+      "address":"49 Trương Chí Cương, Hải Châu",
+      "lat":16.031087,
+      "lng":108.225011
+   },
+   {  
+      "id":76,
+      "name":"Draft Beer",
+      "address":"Lô 99 Võ Nguyễn Giáp, Ngũ Hành Sơn",
+      "lat":16.041341,
+      "lng":108.248804
+   },
+   {  
+      "id":77,
+      "name":"UBND Phường Hòa Cường Nam",
+      "address":"672 Núi Thành",
+      "lat":16.027989,
+      "lng":108.221924
+   }
+]
