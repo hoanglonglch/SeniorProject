@@ -1,14 +1,19 @@
 package com.guru.controller;
 
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.guru.service.IMapService;;
 
 @Controller
@@ -45,6 +50,31 @@ public class MapController {
 			break;
 		}
 		return "stations_map";
+	}
+	
+	@RequestMapping(value = MapURL.SPOT_MARKER, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String spotDetailMarker(@RequestParam("spotId") int id, Model model) {
+		String jsonString="";
+		String data="";
+		Gson gson= new Gson();
+		logger.info("marker "+id);
+		switch (id) {
+		case 1:
+				data=gson.toJson(serviceMap.getPoliceStations());
+			/*JSONArray jsArr=new JSONArray(serviceMap.getPoliceStations());
+			data=jsArr.toString();*/
+			break;
+		case 2:
+			data=gson.toJson( serviceMap.getHospitalStations());
+			break;
+		case 3:
+			data=gson.toJson(serviceMap.getWcStations());
+			break;
+		case 4:
+			data=gson.toJson(serviceMap.getBusStations());
+			break;
+		}
+		return data;
 	}
 
 }

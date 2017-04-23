@@ -57,19 +57,12 @@ function initMap() {
         markers = [];
         let spotId = $(this).find(".spotId").text();
         sideBarSpotGetContent(url, spotId);
+        mapDrawMarker(url, spotId,map,infowindow,geocoder);
        /* trend = "true";
         currentTrend = "true"
         ajaxGetContent(url, routeId, trend);
         currentRoute = routeId;
         callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow);*/
-    });
-    $("body").on("click", "#btnBack", function (event) {
-        currentTrend = "false";
-        checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow);
-    });
-    $("body").on("click", "#btnGo", function (event) {
-        currentTrend = "true";
-        checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow);
     });
     $("body").on("click","#btnSearch",function(event){
         sendAddress();
@@ -103,11 +96,33 @@ function sideBarSpotGetContent(url, spotId) {
             var html = jQuery('<body>').html(data);
             var content = html.find("#station-detail").html();
             $("#routes-tab").html(content);
-             /*showMarkerDetail(markers);*/
+             showMarkerDetail(markers);
         }
     });
 }
-
+function mapDrawMarker(url, spotId,map,infowindow,geocoder){
+	 var getUrl = url + "/spots" ;
+	    $.ajax({
+	        type: "GET"
+	        , url: getUrl
+	        , data: {
+	        	spotId:spotId
+	        }
+	        , success: function (data) {
+	        	// create marker here
+	        	let markerT;
+	        	for(let i=0;i<data.length;i++){
+	        		 markers.push(createMarker(data[i].lat,data[i].lng, map));
+	        		 
+	        		 markers[i].addListener('click', function () {
+	        	        	map.setCenter(markers[i].getPosition());
+	        	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+	        	            infowindow.open(map, markers[i]);
+	        	  });
+	        	}
+	        }
+	    });
+}
 function ajaxDirection(url,startPoint,endPoint) {
     var getUrl = url + "/detail" ;
     $.ajax({
@@ -234,10 +249,9 @@ function calculateAndDisplayRoute1(directionsService, directionsDisplay, jsonRes
     drawDirection(jsonResponse,map,directionsService,directionsDisplay);
 }
 
-function createMarker(lat, lng, icon, map) {
+function createMarker(lat, lng, map) {
     let marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat, lng)
-        , icon: icon
         , map: map
     });	
     return marker;
@@ -277,7 +291,7 @@ function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {
     }, function (results, status) {
         if (status === 'OK') {
             if (results[0]) {
-                let contentString = '<div id="infoContent" style="height:85px;width:355px">' + '<div id="siteNotice">' + '</div>' + '<div id="bodyContent" >' + '<p><b>Tên trạm dừng:    </b>' + nameStation + '</p>' + '<p><b>Địa chỉ:    </b>' + results[0].formatted_address + '</p>' + '<input style="height:20px;width:341px" type = "button" value = "Thời gian chờ"/>' + '</div>' + '</div>';
+                let contentString = '<div id="infoContent" style="height:85px;width:355px">' + '<div id="siteNotice">' + '</div>' + '<div id="bodyContent" >' + '<p><b>Tên địa điểm:    </b>' + nameStation + '</p>' + '<p><b>Địa chỉ:    </b>' + results[0].formatted_address + '</p>' + '</div>' + '</div>';
                 infowindow.setContent(contentString);
             }
             else {
