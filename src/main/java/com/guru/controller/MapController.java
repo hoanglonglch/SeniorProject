@@ -60,7 +60,7 @@ public class MapController {
 		logger.info("marker "+id);
 		switch (id) {
 		case 1:
-				data=gson.toJson(serviceMap.getPoliceStations());
+			data=gson.toJson(serviceMap.getPoliceStations());
 			/*JSONArray jsArr=new JSONArray(serviceMap.getPoliceStations());
 			data=jsArr.toString();*/
 			break;

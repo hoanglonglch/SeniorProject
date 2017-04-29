@@ -25,15 +25,15 @@
 						style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
 					</span></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<!--change <a> tag and glyph icon color  -->
+				<!-- <ul class="nav navbar-nav navbar-right">
+					change <a> tag and glyph icon color 
 					<li><a style="color: #f8f8f8"><span
 							class="glyphicon glyphicon-user" style="color: #f8f8f8"></span>
 							Đăng Ký</a></li>
 					<li><a style="color: #f8f8f8"><span
 							class="glyphicon glyphicon-log-in" style="color: #f8f8f8"></span>
 							Đăng Nhập</a></li>
-				</ul>
+				</ul> -->
 			</div>
 		</nav>
 	</header>
@@ -64,17 +64,6 @@
 							aria-describedby="sizing-addon2"></input>
 					</div>
 					<div class="containter">
-						<div class="row row-eq-height rowClear row-bordered">
-							<div class="col-md-2 col-xs-6">
-								<p>route</p>
-							</div>
-							<div class="col-md-2 col-xs-6">
-								<p class="routeId">5</p>
-							</div>
-							<div class="col-md-8 col-xs-12">
-								<p>Nguyen Tat Thanh- Xuan Dieu</p>
-							</div>
-						</div>
 						<div class="row row-eq-height rowClear row-bordered">
 							<div class="col-md-2 col-xs-6">
 								<p class="spotId">1</p>
@@ -122,19 +111,14 @@
 										value="135 cù chính lan" />
 								</div>
 							</div>
-							<div class="col-md-12 col-xs-12">
-								<div class="input-group input-group-sm">
-									<span class="input-group-addon" id="sizing-addon3">@</span> <input
-										id="endPoint" type="text" class="form-control"
-										placeholder="Username" aria-describedby="sizing-addon3"
-										value="466 lê duẩn" />
-								</div>
-							</div>
-							<div class="col-md-4 col-md-offset-4 col-xs-offset-4">
+							<div class="col-md-8 col-md-offset-2">
 								<div class="btn-group btn-group-sm" role="group"
 									aria-label="...">
-									<div class="btn-group" role="group" aria-label="...">
-										<button type="button" id="btnSearch" class="btn btn-default">Search</button>
+									<div class="btn-group btn-searchGroup" role="group" aria-label="...">
+										<button type="button" id="police" class="btn btn-default">Đồn CA</button>
+										<button type="button" id="hospital" class="btn btn-default">Bệnh Viện</button>
+										<button type="button" id="wc" class="btn btn-default">WC</button>
+										<button type="button" id="busStation" class="btn btn-default">Trạm Bus</button>
 									</div>
 								</div>
 							</div>
@@ -152,7 +136,7 @@
 	<script src="../resources/JsMapOffical.js"></script>
 	<script src="../resources/js/bootstrap.min.js"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv7lDkj6Yd3cMbujJcHTKIo_AzLEga-7c&amp;callback=initMap"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2qBdl3QkeEJGxkWV3aKdPTlYpX117Esk&amp;callback=initMap"
 		async="async" defer="defer"></script>
 	<script>
 		//change tab script

@@ -37,12 +37,6 @@ function initMap() {
     });
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-   /*
-	 * directionsDisplay.setMap(map); directionsDisplay.setOptions({
-	 * suppressMarkers: true });
-	 */
-    /* init event for app */
-    
     
     $("body").on("click", ".btn-back", function (event) {
         if(directionsDisplay){
@@ -53,38 +47,39 @@ function initMap() {
     });
     
     $("body").on("click", ".rowClear", function (event) {
+    	console.log($(this).html());
         clearMarkers();
         markers = [];
         let spotId = $(this).find(".spotId").text();
         sideBarSpotGetContent(url, spotId);
         mapDrawMarker(url, spotId,map,infowindow,geocoder);
-       /* trend = "true";
-        currentTrend = "true"
-        ajaxGetContent(url, routeId, trend);
-        currentRoute = routeId;
-        callAjax(url, routeId, trend, directionsService, directionsDisplay, map, geocoder, infowindow);*/
     });
-    $("body").on("click","#btnSearch",function(event){
-        sendAddress();
+    
+    $("body").on("click",".btn-default",function(event){
+    	let spotId1= $(this).attr('id');
+    	sendAddress(spotId1,map,directionsService,geocoder,infowindow)
     });
 }
 
-function sendAddress(){
+function sendAddress(spotId1,map,directionsService,geocoder,infowindow){
     let startPoint=$("#startPoint").val();
-    let endPoint=$("#endPoint").val();
-    ajaxDirection(url,startPoint,endPoint);
-    sideBarDirection(url,startPoint,endPoint);
+    console.log(spotId1+"  "+startPoint);
+//    ajaxDirection(url,startPoint,endPoint);
+//    sideBarDirection(url,startPoint,endPoint);
 }
-
-function checkTrend(currentTrend, currentRoute, url, directionsService, directionsDisplay, map, geocoder, infowindow) {
-    if (currentTrend == trend) {}
-    else {
-        clearMarkers();
-        markers = [];
-        trend = currentTrend;
-        ajaxGetContent(url, currentRoute, currentTrend);
-        callAjax(url, currentRoute, currentTrend, directionsService, directionsDisplay, map, geocoder, infowindow);
-    }
+function ajaxDirection(url,startPoint,endPoint) {
+    var getUrl = url + "/detail" ;
+    $.ajax({
+        type: "GET"
+        , url: getUrl
+        , data: {
+            startPoint:startPoint,
+            endPoint:endPoint
+        }
+        , success: function (data) {
+            console.log("datat ne "+data[0].name);
+        }
+    });
 }
 
 function sideBarSpotGetContent(url, spotId) {
@@ -123,20 +118,7 @@ function mapDrawMarker(url, spotId,map,infowindow,geocoder){
 	        }
 	    });
 }
-function ajaxDirection(url,startPoint,endPoint) {
-    var getUrl = url + "/detail" ;
-    $.ajax({
-        type: "GET"
-        , url: getUrl
-        , data: {
-            startPoint:startPoint,
-            endPoint:endPoint
-        }
-        , success: function (data) {
-            console.log("datat ne "+data[0].name);
-        }
-    });
-}
+
 function sideBarDirection(url,startPoint,endPoint) {
 	var getUrl = url + "/direction" ;
 	$.ajax({
