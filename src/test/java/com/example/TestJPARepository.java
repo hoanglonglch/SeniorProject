@@ -20,6 +20,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.google.maps.model.LatLng;
 import com.guru.model.Bus;
 import com.guru.model.Hospital;
 import com.guru.model.Police;
@@ -28,6 +29,7 @@ import com.guru.repository.BusStationRepository;
 import com.guru.repository.HospitalRepository;
 import com.guru.repository.PoliceRepository;
 import com.guru.repository.WCRepository;
+import com.guru.service.IMapService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,8 +41,8 @@ public class TestJPARepository {
 	/*@Autowired
 	BusStationRepository repositoryBusStation;*/
 	
-	/*@Autowired
-	PoliceRepository repositoryPolice;*/
+	@Autowired
+	PoliceRepository repositoryPolice;
 	
 	/*@Autowired
 	HospitalRepository repositoryHos;*/
@@ -51,25 +53,13 @@ public class TestJPARepository {
 	@Autowired
 	WCRepository reposWc;
 
+	@Autowired
+	IMapService serviceMap;
 	
 	@Test
 	public void imporData(){
-	/*	List<Police> polices=saveBusRoute("police");
-		for (Police police : polices) {
-			repositoryPolice.save(police);
-		}
-		assertEquals(26, repositoryPolice.findAll().size());*/
-		/*List<Hospital> hopitls=saveHospital("Hospital");
-		for (Hospital hospital : hopitls) {
-			repositoryHos.save(hospital); 
-		}
-		assertEquals(55,repositoryHos.findAll().size());*/
-		/*List<Bus> busses= saveBus("busStation");
-		for (Bus bus : busses) {
-			repositoryBus.save(bus);
-		}
-		assertEquals(132, busses.size());*/
-		assertEquals(77,reposWc.findAll().size());
+		List<LatLng> latLngs= serviceMap.findNearlyPolice("135 cù chính lan,da nang");
+		assertEquals(2, latLngs.size());
 	}
 		
 	public static List<Police> saveBusRoute(String fileName ){

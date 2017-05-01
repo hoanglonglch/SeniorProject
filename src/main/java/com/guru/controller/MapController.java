@@ -33,48 +33,73 @@ public class MapController {
 	public String spotDetailSideBar(@PathVariable("id") int id, Model model) {
 		switch (id) {
 		case 1:
-			model.addAttribute("station","Đồn Công An");
+			model.addAttribute("station", "Đồn Công An");
 			model.addAttribute("stations", serviceMap.getPoliceStations());
 			break;
 		case 2:
-			model.addAttribute("station","Bệnh Viện");
+			model.addAttribute("station", "Bệnh Viện");
 			model.addAttribute("stations", serviceMap.getHospitalStations());
 			break;
 		case 3:
-			model.addAttribute("station","WC");
+			model.addAttribute("station", "WC");
 			model.addAttribute("stations", serviceMap.getWcStations());
 			break;
 		case 4:
-			model.addAttribute("station","Trạm Xe Buýt");
-			model.addAttribute("stations",serviceMap.getBusStations());
+			model.addAttribute("station", "Trạm Xe Buýt");
+			model.addAttribute("stations", serviceMap.getBusStations());
 			break;
 		}
 		return "stations_map";
 	}
-	
+
 	@RequestMapping(value = MapURL.SPOT_MARKER, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String spotDetailMarker(@RequestParam("spotId") int id, Model model) {
-		String jsonString="";
-		String data="";
-		Gson gson= new Gson();
-		logger.info("marker "+id);
+		String jsonString = "";
+		String data = "";
+		Gson gson = new Gson();
+		logger.info("marker " + id);
 		switch (id) {
 		case 1:
-			data=gson.toJson(serviceMap.getPoliceStations());
-			/*JSONArray jsArr=new JSONArray(serviceMap.getPoliceStations());
-			data=jsArr.toString();*/
+			data = gson.toJson(serviceMap.getPoliceStations());
+			/*
+			 * JSONArray jsArr=new JSONArray(serviceMap.getPoliceStations());
+			 * data=jsArr.toString();
+			 */
 			break;
 		case 2:
-			data=gson.toJson( serviceMap.getHospitalStations());
+			data = gson.toJson(serviceMap.getHospitalStations());
 			break;
 		case 3:
-			data=gson.toJson(serviceMap.getWcStations());
+			data = gson.toJson(serviceMap.getWcStations());
 			break;
 		case 4:
-			data=gson.toJson(serviceMap.getBusStations());
+			data = gson.toJson(serviceMap.getBusStations());
 			break;
 		}
 		return data;
 	}
 
+	@RequestMapping(value = MapURL.SPOT_DIRECTION, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String spotDirection(@RequestParam("spotId1") int id,
+										@RequestParam("startPoint") String startPoint) {
+		String jsonString = "";
+		String data = "";
+		Gson gson = new Gson();
+		logger.info("here "+startPoint+" "+id);
+		switch (id) {
+		case 1:
+			data = gson.toJson(serviceMap.findNearlyPolice1(startPoint));
+			break;
+		case 2:
+			data = gson.toJson(serviceMap.getHospitalStations());
+			break;
+		case 3:
+			data = gson.toJson(serviceMap.getWcStations());
+			break;
+		case 4:
+			data = gson.toJson(serviceMap.getBusStations());
+			break;
+		}
+		return data;
+	}
 }

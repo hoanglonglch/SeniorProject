@@ -2,6 +2,8 @@ var markers = [];
 var url = window.location.href;
 var trend;
 var currentTrend;
+var renderList=[];
+
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "30%";
@@ -15,13 +17,13 @@ function initMap() {
     let directionsService = new google.maps.DirectionsService;
     var directionsDisplay=new google.maps.DirectionsRenderer;
     let geocoder = new google.maps.Geocoder;
+    let geocoder2=new google.maps.Geocoder;
     let infowindow = new google.maps.InfoWindow;
     let currentRoute;
     var styledMapType = customizeMap();
     
     let directionTab=$("#directions-tab").html();
     let routesTab=$("#routes-tab").html();
-// console.log(directionTab.html());
     
     
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -38,18 +40,22 @@ function initMap() {
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
     
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('direction-content'));
+    
     $("body").on("click", ".btn-back", function (event) {
-        if(directionsDisplay){
-            directionsDisplay.setMap(null);
-        }
         clearMarkers();
         $("#routes-tab").html(routesTab);
+        markers = [];
+        clearPolyline(renderList);
+        renderList=[];
     });
     
     $("body").on("click", ".rowClear", function (event) {
-    	console.log($(this).html());
         clearMarkers();
         markers = [];
+        clearPolyline(renderList);
+        renderList=[];
         let spotId = $(this).find(".spotId").text();
         sideBarSpotGetContent(url, spotId);
         mapDrawMarker(url, spotId,map,infowindow,geocoder);
@@ -57,30 +63,48 @@ function initMap() {
     
     $("body").on("click",".btn-default",function(event){
     	let spotId1= $(this).attr('id');
-    	sendAddress(spotId1,map,directionsService,geocoder,infowindow)
+        clearMarkers();
+        markers = [];
+    	sendAddress(spotId1,map,directionsService,geocoder,infowindow,directionsDisplay,geocoder);
     });
+    
 }
 
-function sendAddress(spotId1,map,directionsService,geocoder,infowindow){
+function sendAddress(spotId1,map,directionsService,geocoder,infowindow,directionsDisplay,geocoder2){
     let startPoint=$("#startPoint").val();
-    console.log(spotId1+"  "+startPoint);
-//    ajaxDirection(url,startPoint,endPoint);
-//    sideBarDirection(url,startPoint,endPoint);
+    alert(startPoint+" "+spotId1);
+    ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowindow,directionsDisplay);
+//    mapDrawMarker(url, spotId1,map,infowindow,geocoder);
+    
 }
-function ajaxDirection(url,startPoint,endPoint) {
-    var getUrl = url + "/detail" ;
+function ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowindow,directionsDisplay) {
+   var getUrl = url + "/direction" ;
     $.ajax({
         type: "GET"
         , url: getUrl
         , data: {
             startPoint:startPoint,
-            endPoint:endPoint
+            spotId1:spotId1
         }
         , success: function (data) {
-            console.log("datat ne "+data[0].name);
+        	 directionsDisplay.setMap(map);
+        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	drawDirection(data,map,directionsService,directionsDisplay);
+        	 directionsDisplay.setMap(map);
+        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	for(let i=0;i<data.length;i++){
+       		 markers.push(createMarker(data[i].lat,data[i].lng, map));
+       		 markers[i].addListener('click', function () {
+       	        	map.setCenter(markers[i].getPosition());
+       	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+       	            infowindow.open(map, markers[i]);
+       	  });
+       	}
+        	
         }
     });
 }
+
 
 function sideBarSpotGetContent(url, spotId) {
     var getUrl = url + "/spot/" + spotId;
@@ -285,7 +309,12 @@ function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {
         }
     });
 }
-function drawDirection(stations,map,service,directionsDisplay){
+function clearPolyline(renderList){
+    for(let i=0;i<renderList.length;i++){
+        renderList[i].setMap(null);
+    }
+}
+function drawDirection(stations,map,service){
 
     var lngs = stations.map(function (station) {
         return station.lng;
@@ -304,18 +333,18 @@ function drawDirection(stations,map,service,directionsDisplay){
     for (var i = 0, parts = [], max = 25-1; i < stations.length; i = i + max) parts.push(stations.slice(i, i + max + 1));
     // Callback function to process service results
     var service_callback = function (response, status) {
-        if (status != 'OK') {
-            console.log('Directions request failed due to ' + status);
-            return;
-        }
-        
-// directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsDisplay.setMap(map);
-        directionsDisplay.setOptions({
-            suppressMarkers: true
-            , preserveViewport: true
-        });
-        directionsDisplay.setDirections(response);
+                if (status != 'OK') {
+                    console.log('Directions request failed due to ' + status);
+                    return;
+                }
+                var renderer = new google.maps.DirectionsRenderer;
+                renderer.setMap(map);
+                renderer.setOptions({
+                    suppressMarkers: true
+                    , preserveViewport: true
+                });
+                renderList.push(renderer);
+                renderer.setDirections(response);
     };
     // Send requests to service to get route (for stations count <= 25 only one
 	// request will be sent)
