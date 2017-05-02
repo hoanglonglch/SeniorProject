@@ -87,17 +87,17 @@ function ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowin
             spotId1:spotId1
         }
         , success: function (data) {
-        	directionsDisplay.setMap(map);
-        	directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	 directionsDisplay.setMap(map);
+        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
         	drawDirection(data,map,directionsService,directionsDisplay);
-        	directionsDisplay.setMap(map);
-        	directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	 directionsDisplay.setMap(map);
+        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
         	for(let i=0;i<data.length;i++){
        		 markers.push(createMarker(data[i].lat,data[i].lng, map));
        		 markers[i].addListener('click', function () {
-       			 map.setCenter(markers[i].getPosition());
-       	         geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
-       	         infowindow.open(map, markers[i]);
+       	        	map.setCenter(markers[i].getPosition());
+       	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+       	            infowindow.open(map, markers[i]);
        	  });
        	}
         	
@@ -346,6 +346,28 @@ function drawDirection(stations,map,service){
                     , preserveViewport: true
                 });
                 renderList.push(renderer);
+                
+                var steps;
+                try {
+                	steps = response['routes'][0]['legs'][0]['steps'];
+				} catch (e) {
+					steps = [];
+				}
+				var i = 0;
+				var html = '';
+				for(i; i< steps.length; i++) {
+					html += `<div class="row row-eq-height rowClear row-bordered">
+							<div class="col-md-1">
+								<p class="spotId">`+(i+1)+`</p>
+							</div>
+							<div class="col-md-11" >
+								`+steps[i]['instructions']+`
+							</div>
+						</div>`; 
+				}
+				console.log('dm', response, steps)
+                $('#direction-content').html(html);
+                
                 renderer.setDirections(response);
     };
     // Send requests to service to get route (for stations count <= 25 only one
