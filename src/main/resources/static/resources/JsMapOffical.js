@@ -61,7 +61,7 @@ function initMap() {
         mapDrawMarker(url, spotId,map,infowindow,geocoder);
     });
     
-    $("body").on("click",".btn-default",function(event){
+    $("body").on("click",".button",function(event){
     	let spotId1= $(this).attr('id');
         clearMarkers();
         markers = [];
@@ -87,17 +87,17 @@ function ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowin
             spotId1:spotId1
         }
         , success: function (data) {
-        	 directionsDisplay.setMap(map);
-        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	directionsDisplay.setMap(map);
+        	directionsDisplay.setPanel(document.getElementById('direction-content'));
         	drawDirection(data,map,directionsService,directionsDisplay);
-        	 directionsDisplay.setMap(map);
-        	    directionsDisplay.setPanel(document.getElementById('direction-content'));
+        	directionsDisplay.setMap(map);
+        	directionsDisplay.setPanel(document.getElementById('direction-content'));
         	for(let i=0;i<data.length;i++){
        		 markers.push(createMarker(data[i].lat,data[i].lng, map));
        		 markers[i].addListener('click', function () {
-       	        	map.setCenter(markers[i].getPosition());
-       	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
-       	            infowindow.open(map, markers[i]);
+       			 map.setCenter(markers[i].getPosition());
+       	         geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+       	         infowindow.open(map, markers[i]);
        	  });
        	}
         	
@@ -132,7 +132,6 @@ function mapDrawMarker(url, spotId,map,infowindow,geocoder){
 	        	let markerT;
 	        	for(let i=0;i<data.length;i++){
 	        		 markers.push(createMarker(data[i].lat,data[i].lng, map));
-	        		 
 	        		 markers[i].addListener('click', function () {
 	        	        	map.setCenter(markers[i].getPosition());
 	        	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
@@ -257,7 +256,10 @@ function calculateAndDisplayRoute1(directionsService, directionsDisplay, jsonRes
 
 function createMarker(lat, lng, map) {
     let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lat, lng)
+        position: new google.maps.LatLng(lat, lng),icon:{
+            url:    'http://maps.google.com/mapfiles/kml/paddle/wht-stars.png',scaledSize: new google.maps.Size(40, 40)
+
+          } 
         , map: map
     });	
     return marker;
@@ -284,7 +286,7 @@ function showMarkerDetail1(markers){
         });
     }
     }else{
-        alert("ahhihi");
+        alert("0");
     }
 }
 function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {

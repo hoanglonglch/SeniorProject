@@ -1,5 +1,5 @@
  body {
-     font-family: "Lato", sans-serif;
+     font-family: "Tahoma";
  }
  
  .sidenav {
@@ -9,7 +9,7 @@
      z-index: 1;
      top: 0;
      left: 0;
-     background-color: #34b67a;
+     background-color: #141414;/*#4285F6;/* #34b67a; */
      overflow-x: hidden;
      transition: 0.5s;
      padding-top: 60px;
@@ -19,14 +19,14 @@
      /* padding: 8px 8px 8px 32px;*/
      text-decoration: none;
      font-size: 25px;
-     color: #f8f8f8;
+     color: #26a69a;
      display: block;
-     transition: 0.3s
+     transition: 0.3s;
  }
  
  .sidenav a:hover,
  .offcanvas a:focus {
-     color: green;
+     color: #212121/* #4285F6 */;
  }
  
  .sidenav .closebtn {
@@ -53,8 +53,9 @@
  /*map config*/
  
  #map {
-     height: 91.6%;
+     height: 94%;
      width: 100%;
+     
  }
  
  html,
@@ -101,14 +102,16 @@
 }
 
  #mySidenav .nav .active a {
-     background-color: #109d59;
+     background-color: #4e4e4e; /*#3367D5; #109d59; */
  }
  
  #content {
      /*padding-top: 10px;*/
      padding-bottom: 10px;
      background-color:white;
-     height: 90%;
+     height: 92%;
+     overflow-x:hidden;
+     overflow-y:visible;
  }
  
  .searchBox {
@@ -118,7 +121,7 @@
  }
  
  .detailPage {
-     background-color:  #109d59;
+     background-color:  #4e4e4e; /*#3367D5; #109d59; */
  }
  
  .detailPage .btn {
@@ -127,7 +130,7 @@
  
  .directionDispatcher {
      padding: 10px;
-     background-color: #109d59;
+     background-color: #4e4e4e; /*#3367D5;/* #109d59; */
  }
  
  .rowClear4 {
@@ -152,10 +155,11 @@
 /*should customize it*/
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: white;
+    
 }
 .btn-default {
     color: white;
-    background-color: #34b67a;
+    background-color: #212121; /*#4285F6;/* #34b67a; */
     border-radius:0;
 }
 .input-group-addon {
@@ -165,7 +169,38 @@
     line-height: 1;
     color: white;
     text-align: center;
-    background-color:#34b67a;
+    background-color: #212121;/*#3367D5;/* #34b67a; */
     border: 1px solid #ccc;
     /* border-radius: 4px; */
+}
+
+.btn-group .button {
+    background-color: #212121;/*#ffffff; /* Green */
+    border: 1px solid #363636;/*#212121;/* #4285F6; */
+    color: white/* black */ ;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    float: left;
+    display: inline-block;
+    line-height: 1.42857143;
+    border-radius: 20px;
+    font-weight: bold;
+}
+.btn-group .button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+.btn-group .button:hover {
+    background-color: white;/* #4285F6; */
+    color: black;
+}
+.container:after{
+	position: absolute;
+    bottom: 0;
+}
+.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover {
+    border: 1px solid #363636;
 }
