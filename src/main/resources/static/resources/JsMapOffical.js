@@ -358,14 +358,14 @@ function drawDirection(stations,map,service){
 				for(i; i< steps.length; i++) {
 					html += `<div class="row row-eq-height rowClear row-bordered">
 							<div class="col-md-1">
-								<p class="spotId">`+(i+1)+`</p>
+								<p>`+(i+1)+`</p>
 							</div>
 							<div class="col-md-11" >
 								`+steps[i]['instructions']+`
 							</div>
 						</div>`; 
 				}
-				console.log('dm', response, steps)
+				console.log('mm', response, steps)
                 $('#direction-content').html(html);
                 
                 renderer.setDirections(response);
