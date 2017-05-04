@@ -17,5 +17,8 @@ public interface IMapService {
 	 
 	 List<LatLng> findNearlyPolice(String startPoint);
 	 List<RouteElement> findNearlyPolice1(String originAddress);
+	 List<RouteElement> findNearlyHospital(String originAddress);
+	 List<RouteElement> findNearlyWc(String originAddress);
+	 List<RouteElement> findNearlyBusStation(String originAddress);
 
 }

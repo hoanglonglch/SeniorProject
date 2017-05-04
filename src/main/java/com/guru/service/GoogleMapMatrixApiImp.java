@@ -15,7 +15,7 @@ public class GoogleMapMatrixApiImp implements IGoogleMapMatrixApi{
 //	get data from xml file?
 	
 //	GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyCv7lDkj6Yd3cMbujJcHTKIo_AzLEga-7c");
-	GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyA_C3SBwk2NQSZjwjq-9XVdWH2hy1vue3g");
+	GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyC9t8okDgPjsnac_SuAj7gWpH2xFfnZdQA");
 //	GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyDfR6OaUcU8MB1BdRuweZMJrjNVjdDZUOw");
 	
 	@Override

@@ -91,13 +91,13 @@ public class MapController {
 			data = gson.toJson(serviceMap.findNearlyPolice1(startPoint));
 			break;
 		case 2:
-			data = gson.toJson(serviceMap.getHospitalStations());
+			data = gson.toJson(serviceMap.findNearlyHospital(startPoint));
 			break;
 		case 3:
-			data = gson.toJson(serviceMap.getWcStations());
+			data = gson.toJson(serviceMap.findNearlyWc(startPoint));
 			break;
 		case 4:
-			data = gson.toJson(serviceMap.getBusStations());
+			data = gson.toJson(serviceMap.findNearlyBusStation(startPoint));
 			break;
 		}
 		return data;

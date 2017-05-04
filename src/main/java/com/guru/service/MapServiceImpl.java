@@ -159,4 +159,151 @@ public class MapServiceImpl<E> implements IMapService {
 		routeElements.add(new RouteElement(polices.get(index).getName(), polices.get(index).getAddress(),polices.get(index).getLat(), polices.get(index).getLng()));
 		return routeElements;
 	}
+
+	@Override
+	public List<RouteElement> findNearlyHospital(String originAddress) {
+		List<Hospital> polices = repositoryHos.findAll();
+		List<RouteElement> routeElements=new ArrayList<>();
+		int size = polices.size();
+
+		GeocodingResult[] result = ggMatrix.geocodeFromAddress(originAddress);
+		LatLng originLatLng = new LatLng(result[0].geometry.location.lat, result[0].geometry.location.lng);
+		routeElements.add(new RouteElement("origin point", "origin", originLatLng.lat,originLatLng.lng));
+		String originLatLngStr = originLatLng.lat + "," + originLatLng.lng;
+		String destinations = "";
+		String latLng = "";
+		String[] destiationArr = {};
+		String[] origins = { originLatLngStr };
+		DistanceMatrix matrix;
+		List<Integer> realDistances = new ArrayList<>();
+		int realDistance = 0;
+		int matrixLength;
+
+		for (int i = 0; i < size; i++) {
+			destinations += polices.get(i).getLat() + "," + polices.get(i).getLng() + "|";
+		}
+		destiationArr = destinations.split("\\|");
+
+		for (int i = 0; i < size; i++) {
+			if (i == size - 1) {
+				matrix = ggMatrix.getDistanceMatrixUser(origins, destiationArr);
+				matrixLength = matrix.rows[0].elements.length;
+				for (int j = 0; j < matrixLength; j++) {
+					realDistance = (int) matrix.rows[0].elements[j].distance.inMeters;
+//					System.out.println(j+" real distance "+realDistance);
+					realDistances.add(realDistance);
+				}
+				destiationArr = new String[] {};
+			}
+		}
+		int min=0;
+		int index=0;
+		min=realDistances.get(0);
+		for (int i = 0; i < realDistances.size()-1; i++) {
+			if(min>realDistances.get(i)){
+				min=realDistances.get(i);
+				index=i;
+			}
+		}
+		routeElements.add(new RouteElement(polices.get(index).getName(), polices.get(index).getAddress(),polices.get(index).getLat(), polices.get(index).getLng()));
+		return routeElements;
+	}
+
+	@Override
+	public List<RouteElement> findNearlyWc(String originAddress) {
+		List<WC> polices = repoWc.findAll();
+		List<RouteElement> routeElements=new ArrayList<>();
+		int size = polices.size();
+
+		GeocodingResult[] result = ggMatrix.geocodeFromAddress(originAddress);
+		LatLng originLatLng = new LatLng(result[0].geometry.location.lat, result[0].geometry.location.lng);
+		routeElements.add(new RouteElement("origin point", "origin", originLatLng.lat,originLatLng.lng));
+		String originLatLngStr = originLatLng.lat + "," + originLatLng.lng;
+		String destinations = "";
+		String latLng = "";
+		String[] destiationArr = {};
+		String[] origins = { originLatLngStr };
+		DistanceMatrix matrix;
+		List<Integer> realDistances = new ArrayList<>();
+		int realDistance = 0;
+		int matrixLength;
+
+		for (int i = 0; i < size; i++) {
+			destinations += polices.get(i).getLat() + "," + polices.get(i).getLng() + "|";
+		}
+		destiationArr = destinations.split("\\|");
+
+		for (int i = 0; i < size; i++) {
+			if (i == size - 1) {
+				matrix = ggMatrix.getDistanceMatrixUser(origins, destiationArr);
+				matrixLength = matrix.rows[0].elements.length;
+				for (int j = 0; j < matrixLength; j++) {
+					realDistance = (int) matrix.rows[0].elements[j].distance.inMeters;
+//					System.out.println(j+" real distance "+realDistance);
+					realDistances.add(realDistance);
+				}
+				destiationArr = new String[] {};
+			}
+		}
+		int min=0;
+		int index=0;
+		min=realDistances.get(0);
+		for (int i = 0; i < realDistances.size()-1; i++) {
+			if(min>realDistances.get(i)){
+				min=realDistances.get(i);
+				index=i;
+			}
+		}
+		routeElements.add(new RouteElement(polices.get(index).getName(), polices.get(index).getAddress(),polices.get(index).getLat(), polices.get(index).getLng()));
+		return routeElements;
+	}
+
+	@Override
+	public List<RouteElement> findNearlyBusStation(String originAddress) {
+		List<Bus> polices = repoBus.findAll();
+		List<RouteElement> routeElements=new ArrayList<>();
+		int size = polices.size();
+
+		GeocodingResult[] result = ggMatrix.geocodeFromAddress(originAddress);
+		LatLng originLatLng = new LatLng(result[0].geometry.location.lat, result[0].geometry.location.lng);
+		routeElements.add(new RouteElement("origin point", "origin", originLatLng.lat,originLatLng.lng));
+		String originLatLngStr = originLatLng.lat + "," + originLatLng.lng;
+		String destinations = "";
+		String latLng = "";
+		String[] destiationArr = {};
+		String[] origins = { originLatLngStr };
+		DistanceMatrix matrix;
+		List<Integer> realDistances = new ArrayList<>();
+		int realDistance = 0;
+		int matrixLength;
+
+		for (int i = 0; i < size; i++) {
+			destinations += polices.get(i).getLat() + "," + polices.get(i).getLng() + "|";
+		}
+		destiationArr = destinations.split("\\|");
+
+		for (int i = 0; i < size; i++) {
+			if (i == size - 1) {
+				matrix = ggMatrix.getDistanceMatrixUser(origins, destiationArr);
+				matrixLength = matrix.rows[0].elements.length;
+				for (int j = 0; j < matrixLength; j++) {
+					realDistance = (int) matrix.rows[0].elements[j].distance.inMeters;
+//					System.out.println(j+" real distance "+realDistance);
+					realDistances.add(realDistance);
+				}
+				destiationArr = new String[] {};
+			}
+		}
+		int min=0;
+		int index=0;
+		min=realDistances.get(0);
+		for (int i = 0; i < realDistances.size()-1; i++) {
+			if(min>realDistances.get(i)){
+				min=realDistances.get(i);
+				index=i;
+			}
+		}
+		routeElements.add(new RouteElement(polices.get(index).getName(), polices.get(index).getAddress(),polices.get(index).getLat(), polices.get(index).getLng()));
+		return routeElements;
+	}
 }
