@@ -17,6 +17,15 @@ public class Bus {
 	private String address;
 	private double lat;
 	private double lng;
+	private String phone;
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public int getId() {
 		return id;
@@ -65,6 +74,17 @@ public class Bus {
 		this.address = address;
 		this.lat = lat;
 		this.lng = lng;
+	}
+	
+
+	public Bus(int id, String name, String address, double lat, double lng, String phone) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.lat = lat;
+		this.lng = lng;
+		this.phone = phone;
 	}
 
 	public Bus() {

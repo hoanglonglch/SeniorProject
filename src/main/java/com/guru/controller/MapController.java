@@ -57,14 +57,9 @@ public class MapController {
 		String jsonString = "";
 		String data = "";
 		Gson gson = new Gson();
-		logger.info("marker " + id);
 		switch (id) {
 		case 1:
 			data = gson.toJson(serviceMap.getPoliceStations());
-			/*
-			 * JSONArray jsArr=new JSONArray(serviceMap.getPoliceStations());
-			 * data=jsArr.toString();
-			 */
 			break;
 		case 2:
 			data = gson.toJson(serviceMap.getHospitalStations());
@@ -76,6 +71,7 @@ public class MapController {
 			data = gson.toJson(serviceMap.getBusStations());
 			break;
 		}
+		logger.info("data is "+data);
 		return data;
 	}
 

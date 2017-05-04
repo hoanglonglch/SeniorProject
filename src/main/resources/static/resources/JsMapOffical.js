@@ -95,7 +95,8 @@ function ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowin
        		 markers.push(createMarker(data[i].lat,data[i].lng, map, spotId1));
        		 markers[i].addListener('click', function () {
        	        	map.setCenter(markers[i].getPosition());
-       	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+       	        	alert("data "+data[i]);
+       	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name,data[i].phone);
        	            infowindow.open(map, markers[i]);
        	  });
        	}
@@ -133,7 +134,7 @@ function mapDrawMarker(url, spotId,map,infowindow,geocoder){
 	        		 markers.push(createMarker(data[i].lat,data[i].lng, map, spotId));
 	        		 markers[i].addListener('click', function () {
 	        	        	map.setCenter(markers[i].getPosition());
-	        	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name);
+	        	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name,data[i].phone);
 	        	            infowindow.open(map, markers[i]);
 	        	  });
 	        	}
@@ -246,7 +247,7 @@ function calculateAndDisplayRoute1(directionsService, directionsDisplay, jsonRes
         }
         markers[i].addListener('click', function () {
         	map.setCenter(markers[i].getPosition());
-           geocodeLatLng(geocoder, map, infowindow,	 lat,lng, jsonResponse[i].name);
+           geocodeLatLng(geocoder, map, infowindow,	 lat,lng, jsonResponse[i].name,jsonResponse[i].name);
             infowindow.open(map, markers[i]);
         });
     }
@@ -301,7 +302,7 @@ function showMarkerDetail1(markers){
 //        alert("0");
     }
 }
-function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {
+function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation,phone) {
     let latlng = {
         lat: lat1
         , lng:lng1
@@ -311,7 +312,12 @@ function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation) {
     }, function (results, status) {
         if (status === 'OK') {
             if (results[0]) {
-                let contentString = '<div id="infoContent" style="height:85px;width:355px">' + '<div id="siteNotice">' + '</div>' + '<div id="bodyContent" >' + '<p><b>Tên địa điểm:    </b>' + nameStation + '</p>' + '<p><b>Địa chỉ:    </b>' + results[0].formatted_address + '</p>' + '</div>' + '</div>';
+                let contentString = '<div id="infoContent" style="height:85px;width:355px">' + '<div id="bodyContent" >' + 
+                '<p><b>Tên địa điểm:  </b>' + nameStation + '</p>' +
+                '<p><b>Địa chỉ:    </b>' + results[0].formatted_address + '</p>' + 
+                '<p><b>dien thoai:    </b>' + phone + '</p>'+'</div>' +
+                '</div>';
+                
                 infowindow.setContent(contentString);
             }
             else {
