@@ -95,7 +95,6 @@ function ajaxDirection(spotId1,startPoint,map,directionsService,geocoder,infowin
        		 markers.push(createMarker(data[i].lat,data[i].lng, map, spotId1));
        		 markers[i].addListener('click', function () {
        	        	map.setCenter(markers[i].getPosition());
-       	        	alert("data "+data[i]);
        	           geocodeLatLng(geocoder, map, infowindow,data[i].lat,data[i].lng, data[i].name,data[i].phone);
        	            infowindow.open(map, markers[i]);
        	  });
@@ -304,20 +303,18 @@ function showMarkerDetail1(markers){
 }
 function geocodeLatLng(geocoder, map, infowindow, lat1,lng1, nameStation,phone) {
     let latlng = {
-        lat: lat1
-        , lng:lng1
+        lat: lat1, 
+        lng:lng1
     };
     geocoder.geocode({
         'location': latlng
     }, function (results, status) {
         if (status === 'OK') {
             if (results[0]) {
-                let contentString = '<div id="infoContent" style="height:85px;width:355px">' + '<div id="bodyContent" >' + 
+                let contentString = '<div id="infoContent" style="height:90px;width:355px">' + '<div id="bodyContent" >' + 
                 '<p><b>Tên địa điểm:  </b>' + nameStation + '</p>' +
                 '<p><b>Địa chỉ:    </b>' + results[0].formatted_address + '</p>' + 
-                '<p><b>dien thoai:    </b>' + phone + '</p>'+'</div>' +
-                '</div>';
-                
+                '<p><b>Điện thoại:    </b>' + phone + '</p>'+'</div>' + '</div>';
                 infowindow.setContent(contentString);
             }
             else {

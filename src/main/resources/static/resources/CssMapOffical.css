@@ -53,16 +53,16 @@
  /*map config*/
  
  #map {
-     height: 94%;
+     height: 92%;
      width: 100%;
      
  }
  
- html,
- body {
+ html,body {
      height: 100%;
      margin: 0;
      padding: 0;
+     margin-bottom: 0;
  }
  /*header*/
  
@@ -76,7 +76,7 @@
  }
  
  .navbar {
-     margin-bottom: 0
+     margin-bottom: 0;
  }
  /*sidenav*/
  
@@ -109,7 +109,7 @@
      /*padding-top: 10px;*/
      padding-bottom: 10px;
      background-color:white;
-     height: 92%;
+     height: 85%;
      overflow-x:hidden;
      overflow-y:visible;
  }
